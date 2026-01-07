@@ -1,5 +1,6 @@
+-- Note: this script should be placed in ServerScriptStorage, it also does not need to be a Local script either --
 local DataStoreService = game:GetService("DataStoreService")
-local playerInventoryData = DataStoreService:GetDataStore("PlayerInventory") -- Unique name
+local playerInventoryData = DataStoreService:GetDataStore("PlayerInventory") -- creating a unique name
 local ServerStorage = game:GetService("ServerStorage")
 
 game.Players.PlayerRemoving:Connect(function(player)
@@ -23,7 +24,7 @@ game.Players.PlayerAdded:Connect(function(player)
 
 		if success and data then -- If data was retrieved successfully
 			for _, itemName in pairs(data) do
-				local toolTemplate = ServerStorage.InventorySaving:FindFirstChild(itemName)
+				local toolTemplate = ServerStorage.InventorySaving:FindFirstChild(itemName) -- change "InventorSaving" to the tool folder name in ServerStorage --
 				if toolTemplate then
 					local newTool = toolTemplate:Clone()
 					newTool.Parent = player.Backpack
@@ -32,5 +33,3 @@ game.Players.PlayerAdded:Connect(function(player)
 		end
 	end)
 end)
-
--- inventory saving script by gemini, testing- change line 27 to name of the items folder cloned in ServerStorage --
